@@ -1,4 +1,4 @@
-# ical Filter
+# filterIcal
 
 Born from needing to extract my work events from my calendar between two dates.
 
