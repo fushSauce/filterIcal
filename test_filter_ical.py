@@ -104,25 +104,33 @@ def test_date_range_between():
     assert expected_dates == event_dates
 
 
-def test_no_organiser():
-    """
-    TODO
-    """
-    runner = CliRunner()
-    result = runner.invoke(filter_ical, ["testCalendar.ics"])
-
-    calendar=Calendar.from_ical(result.output.strip())
-
-    event_dates = [event.get('dtstart').dt for event in calendar.walk('VEVENT')]
-    
-
 def test_organiser():
     """
     TODO
     """
     runner = CliRunner()
-    result = runner.invoke(filter_ical, ["testCalendar.ics"])
+    result_with_organiser_specified = runner.invoke(filter_ical, ["testCalendar.ics","-o","email@email.com"])
 
-    calendar=Calendar.from_ical(result.output.strip())
+    calendar=Calendar.from_ical(result_with_organiser_specified.output.strip())
 
     event_dates = [event.get('dtstart').dt for event in calendar.walk('VEVENT')]
+
+    tz=pytz.timezone('Pacific/Auckland')
+
+    expected_dates = [
+        tz.localize(datetime.datetime(2020,9,18,14,30)),
+        tz.localize(datetime.datetime(2020,9,19,14,30)),
+        tz.localize(datetime.datetime(2020,9,20,14,30))
+    ]
+
+    assert expected_dates == event_dates
+
+    result_with_no_matching_organiser = runner.invoke(filter_ical, ["testCalendar.ics","-o","notinics@email.com"])
+
+    calendar=Calendar.from_ical(result_with_no_matching_organiser.output.strip())
+
+    event_dates = [event.get('dtstart').dt for event in calendar.walk('VEVENT')]
+
+    expected_dates = []
+
+    assert expected_dates == event_dates
