@@ -1,11 +1,8 @@
-from icalendar import Calendar, vDDDTypes
+from icalendar import Calendar
 import click
-from pathlib import Path
-from datetime import datetime
 import dateparser
 import sys
 import operator
-import re
 from loguru import logger
 
 
@@ -32,32 +29,6 @@ def event_organiser_check(event,organiser_filter):
     logger.debug(f"Event organiser check called. Organiser provided: {organiser_filter}, event organizer email found: {event_organiser_email}, equal: {event_organiser_email == organiser_filter}")
     return event_organiser_email == organiser_filter
 
-def filter_events(start_date,end_date,calendar,organizer): 
-    """
-    Iterate ical events, finding events not matching criteria passed in
-    arguments and removing them.
-    """
-    # events = [event for event in calendar.walk('VEVENT')]
-    # print("events: ",events)
-
-    # events_to_remove = []
-    # for event in calendar.walk('VEVENT'):
-    #     event_start = str(event.decoded('dtstart'))
-    #     event_end = str(event.decoded('dtend'))
-    #     event_start_date = datetime.fromisoformat(event_start)
-    #     event_end_date = datetime.fromisoformat(event_end)
-    #     event_organizer=str(event.get('organizer')).strip()
-    #     if organizer.strip() not in event_organizer.strip():
-    #         events_to_remove.append(event)
-    #         continue
-
-    #     if not((event_start_date >= start_date) and (event_end_date <= end_date)):
-    #         events_to_remove.append(event)
-    # for event in events_to_remove:
-    #     calendar.subcomponents.remove(event)
-    return calendar
-    
-
 @click.command()
 @click.argument('ical_file', type=click.File('r'), default=sys.stdin)
 @click.option('-f','--from',"from_value")
@@ -68,10 +39,11 @@ def filter_ical(from_value,to_value,ical_file,organizer_value,debug_value):
     """
     Entrypoint to script.
     """
+
     if not debug_value:
         logger.remove()
+
     logger.debug(f"Command run, arguments: From value: {from_value}, To value: {to_value}, Organizer: {organizer_value}")
-    print("FOOX: ",debug_value)
 
     calendar=Calendar.from_ical(ical_file.read())
     events = [event for event in calendar.walk('VEVENT')]
