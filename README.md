@@ -1,6 +1,12 @@
-# filterIcal
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-Born from needing to extract my work events from my calendar between two dates.
+# filterIcal <i class="fa fa-filter" style="font-size:36px"></i>
+
+So I can quickly extract specific events from my work calendar between date ranges.
+
+## Demo
+
+![demo gif](./demo.gif)
 
 ## Usage
 

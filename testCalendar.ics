@@ -4,21 +4,21 @@ CALSCALE:GREGORIAN
 BEGIN:VEVENT
 DTSTART;TZID=Pacific/Auckland:20200918T143000Z
 DTEND;TZID=Pacific/Auckland:20200918T153000Z
-ORGANIZER;CN="Organizer Email";EMAIL="email@email.com":mailto:email@email.com
+ORGANIZER;CN="Organizer":mailto:email@email.com
 SUMMARY:Test Event 1
 END:VEVENT
 
 BEGIN:VEVENT
 DTSTART;TZID=Pacific/Auckland:20200919T143000Z
 DTEND;TZID=Pacific/Auckland:20200919T153000Z
-ORGANIZER;CN="Organizer Email";EMAIL="email@email.com":mailto:email@email.com
+ORGANIZER;CN="Organizer":mailto:email@email.com
 SUMMARY:Test Event 2
 END:VEVENT
 
 BEGIN:VEVENT
 DTSTART;TZID=Pacific/Auckland:20200920T143000Z
 DTEND;TZID=Pacific/Auckland:20200920T153000Z
-ORGANIZER;CN="Organizer Email";EMAIL="email@email.com":mailto:email@email.com
+ORGANIZER;CN="Organizer":mailto:email@email.com
 SUMMARY:Test Event 3
 END:VEVENT
 
